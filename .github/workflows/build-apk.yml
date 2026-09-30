@@ -1,0 +1,71 @@
+name: Build Android Standalone APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  build:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js 22.x
+      - name: ⚙️ Setup Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      # Step 3: Set up Java 21 (Required by Capacitor 7 & AGP 8.13)
+      - name: ☕ Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      # Step 4: Setup Gradle environment & cache
+      - name: 🐘 Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # Step 5: Install dependencies
+      - name: 📦 Install NPM Dependencies
+        run: npm install --legacy-peer-deps
+
+      # Step 6: Build Web Application (Vite)
+      - name: 🏗️ Build Web Application
+        run: npm run build
+
+      # Step 7: Sync assets directly & via Capacitor (Fail-safe)
+      - name: 🔄 Sync Capacitor Android Assets
+        run: |
+          mkdir -p android/app/src/main/assets/public
+          cp -rf dist/* android/app/src/main/assets/public/
+          npx cap sync android || echo "Assets directly synced into Android directory"
+
+      # Step 8: Build Standalone APK using Gradle
+      - name: 🔨 Build Debug APK via Gradle
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
+        run: |
+          yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
+          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager "platforms;android-36" "build-tools;36.0.0" || true
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      # Step 9: Upload APK Artifact for direct download
+      - name: 📤 Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Habitly-Android-APK
+          path: android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 30

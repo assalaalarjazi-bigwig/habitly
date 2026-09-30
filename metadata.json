@@ -1,0 +1,6 @@
+{
+  "name": "Habitly",
+  "description": "A beautiful, simple, offline-first habit tracker with streaks, monthly calendar, achievements, Arabic/English RTL support, and custom themes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

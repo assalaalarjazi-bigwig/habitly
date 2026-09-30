@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --primary: #10b981;
+    --primary-hover: #059669;
+    --primary-bg: #ecfdf5;
+    --primary-bg-dark: rgba(6, 78, 59, 0.25);
+    --primary-border: #a7f3d0;
+    --primary-border-dark: rgba(16, 185, 129, 0.3);
+    --primary-text: #065f46;
+    --primary-text-dark: #6ee7b7;
+  }
+
+  html[dir="rtl"] {
+    font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html[dir="ltr"] {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Custom scrollbars for clean modern mobile feel */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.45);
+}
+
+@keyframes loadingBar {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(50%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-loading-bar {
+  animation: loadingBar 1.6s ease-in-out infinite;
+  width: 60%;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 8s linear infinite;
+}

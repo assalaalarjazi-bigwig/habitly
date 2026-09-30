@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Habitly</title>
+    <meta name="description" content="A beautiful, simple, offline-first habit tracker with streaks, monthly calendar, achievements, Arabic/English RTL support, and custom themes." />
+    <meta property="og:title" content="Habitly" />
+    <meta property="og:description" content="A beautiful, simple, offline-first habit tracker with streaks, monthly calendar, achievements, Arabic/English RTL support, and custom themes." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#10b981" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Habitly" />
+  </head>
+  <body class="bg-[#090D16] text-stone-100 antialiased select-none selection:bg-emerald-500/20">
+    <div id="root">
+      <div style="position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 2rem; background: #090D16; background-image: radial-gradient(circle at 50% 35%, rgba(16, 185, 129, 0.18) 0%, rgba(9, 13, 22, 1) 70%); font-family: 'Plus Jakarta Sans', 'Tajawal', sans-serif; color: #ffffff;">
+        <div style="padding-top: 1rem;">
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.85rem; border-radius: 9999px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); font-size: 11px; font-weight: 600; color: #34d399;">
+            <span>✦ تتبع عاداتك بلا إنترنت • Offline First</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.25rem;">
+          <div style="position: relative; width: 100px; height: 100px; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.35); border: 1px solid rgba(52, 211, 153, 0.3); background: #0B111E;">
+            <img src="/icon-192.png" alt="Habitly" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <div>
+            <h1 style="margin: 0; font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #34d399 0%, #a7f3d0 50%, #22d3ee 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Habitly</h1>
+            <p style="margin: 0.35rem 0 0 0; font-size: 0.875rem; color: #cbd5e1; font-weight: 500;">ابنِ عاداتك، اصنع نجاحك اليومي</p>
+            <p style="margin: 0.2rem 0 0 0; font-size: 0.7rem; color: #64748b; letter-spacing: 0.05em; text-transform: uppercase;">Build Habits • Master Life</p>
+          </div>
+        </div>
+
+        <div style="width: 100%; max-width: 16rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding-bottom: 1.5rem;">
+          <div style="width: 10rem; height: 4px; background: rgba(255, 255, 255, 0.08); border-radius: 9999px; overflow: hidden; position: relative;">
+            <div style="width: 60%; height: 100%; background: linear-gradient(90deg, #10b981, #34d399, #22d3ee); border-radius: 9999px; animation: initialLoading 1.5s ease-in-out infinite;"></div>
+          </div>
+          <span style="font-size: 11px; color: #94a3b8;">جارٍ التحميل...</span>
+        </div>
+      </div>
+      <style>
+        @keyframes initialLoading {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(50%); }
+          100% { transform: translateX(200%); }
+        }
+      </style>
+    </div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

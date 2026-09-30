@@ -1,0 +1,6 @@
+{
+  "appId": "com.habitly.app",
+  "appName": "Habitly",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

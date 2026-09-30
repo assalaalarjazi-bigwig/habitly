@@ -1,0 +1,29 @@
+{
+  "name": "Habitly - هابتلي لتتبع العادات",
+  "short_name": "Habitly",
+  "description": "تطبيق هادئ وأنيق لتتبع العادات اليومية بمبدأ أوفلاين أولاً مع إحصائيات وأوسمة.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0a09",
+  "theme_color": "#10b981",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
